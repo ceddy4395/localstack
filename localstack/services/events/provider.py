@@ -202,6 +202,9 @@ class EventsProvider(EventsApi, ServiceLifecycleHook):
         )
         store.event_buses[event_bus_service.event_bus.name] = event_bus_service.event_bus
 
+        if tags:
+            self.tag_resource(context, event_bus_service.arn, tags)
+
         response = CreateEventBusResponse(
             EventBusArn=event_bus_service.arn,
         )
